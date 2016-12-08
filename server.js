@@ -23,29 +23,25 @@ var mongoDB;
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/',function(res,req){
-	//Welcome Page
-	res.render('index',{
+	//Welcome Pagev
+	console.log("thing");
+	var data = Models.Item.find(function(err,items){
+    if (err){
+      return console.error(err);
+    }
+    else{
+		res.render('index',{
 
-	})
+		})
+    }
+    
+  });
+
 
 });
 
 app.get('/store',function(res,req){
 	var collection = mongoDB.collection('');
-	collection.find().toArray(function(err,items){
-
-		if (err){
-
-		}
-		else{
-			res.render('',{
-				//Renders a page that has every item in the database.
-				//We're not implementing a sort here, or filters, so it will
-				//just show everything. Maybe alphabetically, maybe whatever order added.
-			})
-		}
-	
-	})
 });
 
 app.get('/addItem',function(res,req){
