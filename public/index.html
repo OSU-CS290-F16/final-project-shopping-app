@@ -7,21 +7,17 @@
 
     <!-- This is a 3rd-party stylesheet for Font Awesome: http://fontawesome.io/ -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" media="screen">
-
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
     <link rel="stylesheet" href="style.css" media="screen">
 
   </head>
   <body>
 
+
     <header>
-
-      <!-- The <i> tag below includes the shoppingbag icon from Font Awesome -->
-      <h1><a href="/"><i class="fa fa-shopping-bag">Generic Shop</i></a></h1>
-
       <nav>
         <ul class="navbar-list">
-          <li class="navbar-item"><a href="/">Home</a></li>
-          <li class="navbar-item"><a href="#">About</a></li>
+          <li class="navbar-item "><a href="/">Home</a></li>
           <li class="navbar-item navbar-right"><a href="cart"><i class="fa fa-shopping-cart">Check out </i></a></li>
         </ul>
       </nav>
@@ -30,17 +26,30 @@
 
     <main>
 
+<!-- Sidenav/menu -->
+<nav class="w3-sidenav w3-white w3-collapse w3-top" style="z-index:3;width:150px" id="mySidenav">
+  <div class="w3-container w3-padding-16">
+    <h3 class="w3-wide"><b>Generic Shop LOGO</b></h3>
+  </div>
+  <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+    <a href="#">Rocks</a>
+    <a href="#">Other</a>
+    <a href="#">Food</a>
+  </div>
+</nav>
+
+
       <section class="inventory">
         <h2>Rock</h2>
         <div class="item-body">
-		<img src="/images/rock.jpg" style="width:300px; height:200px;">
+		<img src="/images/rock.jpg" style="width:200px; height:100px;">
           	<p class="indent-wrapped"><span class="price">Price: </span>2 smaller rocks</p>
           	<p class="indent-wrapped"><span class="details">Details: </span>It's a rock what else do you wanna know</p>
         <div class="add-to-cart">
-		<button id="add-to-cart">+</button>
+		<button id="add-to-cart" class="fa fa-cart-plus"></button>
+
         </div>
       </section>
-
 
     </main>
 
@@ -76,6 +85,6 @@
 
   </body>
 
-  <script src="index.js"></script>
+  <script src="javascript/test.js"></script>
 
 </html>

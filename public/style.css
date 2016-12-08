@@ -8,7 +8,7 @@ a {
 }
 
 header {
-  background-color: yellow;
+  background-color: black;
   padding: 5px 20px 0 5px;
 }
 
@@ -68,18 +68,20 @@ main {
 }
 
 .inventory {
-  background-color: #fffe6e;
+  background-color: white;
   position: relative;
   width: 300px;
   min-height: 300px;
   margin: 20px;
   font-family: "Comic Sans MS", cursive, sans-serif;
-  font-size: 24px;
+  font-size: 14px;
   font-weight: 200;
   word-wrap: break-word;
+  margin-left:150px;
 }
 
 .inventory h2 {
+  margin-left:150px;
   margin: 20px;
   text-align: center;
 }
@@ -112,7 +114,7 @@ main {
   position: absolute;
   top: 0;
   right: 10px;
-  font-size: 30px;
+  font-size: 20px;
   display: none;
   cursor: pointer;
 }
