@@ -5,7 +5,7 @@ mongoose.connect('mongodb://localhost/test');
 var Schema = mongoose.Schema;
 
 var cartSchema = new Schema({
-	cart: {type: [String], index: true, unique: true},
+	cart: {type: String, index: true, unique: true},
 	cartQuantity: {type: Number}
 });
 

@@ -50,18 +50,27 @@ app.get('/store',function(res,req){
 
 app.get('/addItem',function(res,req){
 	console.log("In function");
-	var item = {name: 'asd', price: 5, description: "zxcvbnm", image: "qwetryu"};
 	console.log("Created test item");
 	//DBAccess.createItem(item);
 
-	var newItem = new Models.Item({item});
+	var newItem = new Models.Item({name: 'asdghjkl', price: 5, description: "zxcvbnm", image: "qwetryu"});
 	newItem.save(function (err){
 	  if (err){
 	    return console.error(err);
 	  }
 	})
 	console.log("Ran function");
-	
+
+  Models.Item.find(function(err,items){
+    if (err){
+      return console.error(err);
+    }
+    else{
+      console.log(items);
+    }
+    
+  });
+
 	res.render('index',{
 
 	})
@@ -74,6 +83,13 @@ app.get('/addItem',function(res,req){
 });
 
 app.get('/removeItem',function(res,req){
+
+	Models.Item.findOneAndRemove({ name: 'asdghj' }, function(err){
+	    if (err){
+	      return console.error(err);
+	    }
+	});
+
 	res.render('',{
 		//Renders a page with every item
 
@@ -82,6 +98,29 @@ app.get('/removeItem',function(res,req){
 });
 
 app.get('/updateItem',function(res,req){
+
+  Models.Item.findOneAndUpdate({name:'asdfg'}, { $set : {price: '10'} },
+   function(err) {
+    if (err){
+      return console.error(err);
+    }
+  });
+  Models.Item.findOneAndUpdate({name:'asdfg'}, { $set : {description: 'data.description'} },
+   function(err) {
+    if (err){
+      return console.error(err);
+    }
+  });
+
+  Models.Item.findOneAndUpdate({name:'asdfg'}, { $set : {image: 'data.image'} },
+   function(err) {
+    if (err){
+      return console.error(err);
+    }
+  });
+  //Seems it only updates one, or it overrides the last updated.
+
+
 	res.render('',{
 		//Opens a page that allows the user to adjust
 		//the database entries of an item.
