@@ -4,13 +4,8 @@ mongoose.connect('mongodb://localhost/test');
 
 var Schema = mongoose.Schema;
 
-var userSchema = new Schema({
-	name: {type: String, index: true},
-	queries: {type: [String]}
-});
-
 var cartSchema = new Schema({
-	cart: {type: String, index: true, unique: true},
+	cart: {type: [String], index: true, unique: true},
 	cartQuantity: {type: Number}
 });
 
@@ -18,7 +13,7 @@ var itemSchema = new Schema({
 	name: {type: String, index: true, unique: true},
 	price: {type: Number},
 	description: {type: String},
-	image: {type: [String]}
+	image: {type: String} //For ease of implementation, only one image
 });
 
 var User = mongoose.model("User", userSchema);
