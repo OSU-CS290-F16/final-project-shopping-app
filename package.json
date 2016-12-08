@@ -1,20 +1,32 @@
 {
   "name": "final",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Stores user's inputted data, allows the user to delete previous searches, and downloads the user's query from online store websites to a database, redownloading only after a certain time has passed.",
-  "main": "index.js",
+  "main": "server.js",
   "dependencies": {
-    "express": "^4.14.0",
-    "hyena": "0.0.16",
-    "mongo": "^0.1.0",
-    "mongodb": "^2.2.12",
-    "mongoose": "^4.7.1",
-    "x-ray": "^2.3.1"
+    "express": "~4.14.0",
+    "body-parser": "^1.15.2",
+    "express-handlebars": "^3.0.0",
+    "handlebars": "^4.0.6",
+    "hyena": "~0.0.16",
+    "mongo": "~0.1.0",
+    "mongodb": "~2.2.12",
+    "mongodb-core": "~2.0.14",
+    "mongoose": "~4.7.1",
+    "x-ray": "~2.3.1"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "console.log(\"Hello World\");"
+    "test": "console.log(\\\"Hello World\\\");",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OSU-CS290-F16/final-project-shopping-app.git"
   },
   "author": "",
-  "license": "ISC"
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/OSU-CS290-F16/final-project-shopping-app/issues"
+  }
 }

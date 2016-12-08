@@ -3,7 +3,7 @@ var http = require('http');
 var fs = require('fs');
 var express = require('express');
 var MongoClient = require('mongodb').MongoClient;
-var DBAccess = require('./public/javascript/backend.js');
+var DBAccess = require('./public/javascript/test.js');
 var Models = require('./public/javascript/model');
 //Looks at ./javascript/backend.js to look at the functions. They're basically using mongo.
 
@@ -124,14 +124,6 @@ app.get('/updateItem',function(res,req){
 
 });
 
-
-app.get('/store/:item',function(res,req){
-	//Opens a page that has a detailed view of the item
-	res.render('',{
-		
-	})
-
-});
 
 app.get('/cart',function(res,req){
 	//Opens a page that shows every item in the cart
