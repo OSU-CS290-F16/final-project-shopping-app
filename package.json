@@ -1,0 +1,20 @@
+{
+  "name": "final",
+  "version": "1.0.0",
+  "description": "Stores user's inputted data, allows the user to delete previous searches, and downloads the user's query from online store websites to a database, redownloading only after a certain time has passed.",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.14.0",
+    "hyena": "0.0.16",
+    "mongo": "^0.1.0",
+    "mongodb": "^2.2.12",
+    "mongoose": "^4.7.1",
+    "x-ray": "^2.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "console.log(\"Hello World\");"
+  },
+  "author": "",
+  "license": "ISC"
+}
