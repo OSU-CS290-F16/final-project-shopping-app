@@ -16,9 +16,8 @@ var itemSchema = new Schema({
 	image: {type: String} //For ease of implementation, only one image
 });
 
-var User = mongoose.model("User", userSchema);
 var Cart = mongoose.model("Cart", cartSchema);
 var Item = mongoose.model("Item", itemSchema);
 
-module.exports.User = User;
+module.exports.Cart = Cart;
 module.exports.Item = Item;

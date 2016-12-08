@@ -14,7 +14,7 @@ function createItem(data){
     }
   })
 }
-Let
+
 function createCartItem(data){
   //Adds an item to the cart.
   var newItem = new Cart({data});
@@ -28,7 +28,7 @@ function createCartItem(data){
 
 function readItems() {
   //Gets all items
-  Models.Item.find(function(err,items)){
+  Models.Item.find(function(err,items){
     if (err){
       return console.error(err);
     }
@@ -36,7 +36,7 @@ function readItems() {
       return items;
     }
     
-  };
+  });
 }
 
 function readSpecificItems(id) {
@@ -51,7 +51,7 @@ function readSpecificItems(id) {
 
 function readCart() {
   //Gets all items in the cart
-  Models.Cart.find(function(err,cart)){
+  Models.Cart.find(function(err,cart){
     if (err){
       return console.error(err);
     }
@@ -59,12 +59,13 @@ function readCart() {
       return cart;
     }
     
-  };
+  });
 }
 
 
 function updateItem(id,data){
-  Models.Item.findByIdAndUpdate(id, { $set : {name: data.name}, {price: data.price}, {description: data.description}, {image: data.image}}, function(err,item){
+  Models.Item.findByIdAndUpdate(id, { $set : {name: data.name}, $set : {price: data.price}, $set : {description: data.description}, $set : {image: data.image} },
+   function(err) {
     if (err){
       return console.error(err);
     }
@@ -72,7 +73,7 @@ function updateItem(id,data){
 }
 
 function updateCartQuantity(id,data){
-  Models.cart.findByIdAndUpdate(id, { $set : {cart: data.cart}, {cartQuantity: data.cartQuantity}}, function(err,cart){
+  Models.cart.findByIdAndUpdate(id, { $set : {cart: data.cart}, $set : {cartQuantity: data.cartQuantity}}, function(err){
     if (err){
       return console.error(err);
     }

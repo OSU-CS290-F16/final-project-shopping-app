@@ -3,7 +3,8 @@ var http = require('http');
 var fs = require('fs');
 var express = require('express');
 var MongoClient = require('mongodb').MongoClient;
-var = require('');
+var DBAccess = require('./public/javascript/backend.js');
+//Looks at ./javascript/backend.js to look at the functions. They're basically using mongo.
 
 var app = express();
 
@@ -17,8 +18,6 @@ var mongoPassword = process.env.MONGO_PASSWORD;
 var mongoDBName = process.env.MONGO_DB;
 var mongoURL = 'mongodb://' + mongoUser + ':' + mongoPassword + '@' + mongoHost + ':' + mongoPort + '/' + mongoDBName;
 var mongoDB;
-
-var server = http.createServer(handleRequest);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -90,6 +89,6 @@ app.get('/cart',function(res,req){
 
 });
 
-server.listen(port,function(){
+app.listen(port,function(){
 	console.log("Listening on port: ", port);
 });
