@@ -4,29 +4,29 @@ var router = express.Router();
 var Models = require('./model');
 var request = require('request');
 
-function createItem(data){
+var createItem = function(data){
   //Adds a new item
   var newItem = new Item({data});
   //Insert data
-  newItem.save(function (err, newItem){
+  newItem.save(function (err){
     if (err){
       return console.error(err);
     }
   })
 }
 
-function createCartItem(data){
+var createCartItem = function(data){
   //Adds an item to the cart.
   var newItem = new Cart({data});
   //Insert data
-  newItem.save(function(err,cart){
+  newItem.save(function(err){
     if (err){
       return console.error(err);
     }
   });
 }
 
-function readItems() {
+var readItems = function() {
   //Gets all items
   Models.Item.find(function(err,items){
     if (err){
@@ -39,7 +39,7 @@ function readItems() {
   });
 }
 
-function readSpecificItems(id) {
+var readSpecificItems = function(id) {
   //Gets a specific item
   Models.Item.find({ name: id }, function(err,item){
     if (err){
@@ -49,7 +49,7 @@ function readSpecificItems(id) {
   });
 }
 
-function readCart() {
+var readCart = function() {
   //Gets all items in the cart
   Models.Cart.find(function(err,cart){
     if (err){
@@ -63,7 +63,7 @@ function readCart() {
 }
 
 
-function updateItem(id,data){
+var updateItem = function(id,data){
   Models.Item.findByIdAndUpdate(id, { $set : {name: data.name}, $set : {price: data.price}, $set : {description: data.description}, $set : {image: data.image} },
    function(err) {
     if (err){
@@ -72,7 +72,7 @@ function updateItem(id,data){
   });
 }
 
-function updateCartQuantity(id,data){
+var updateCartQuantity = function(id,data){
   Models.cart.findByIdAndUpdate(id, { $set : {cart: data.cart}, $set : {cartQuantity: data.cartQuantity}}, function(err){
     if (err){
       return console.error(err);
@@ -80,7 +80,7 @@ function updateCartQuantity(id,data){
   });
 }
 
-function deleteItem(id){
+var deleteItem = function(id){
   Models.Item.findByIdAndRemove({ name: id }, function(err){
     if (err){
       return console.error(err);
@@ -88,7 +88,7 @@ function deleteItem(id){
   });
 }
 
-function deleteItemFromCart(id, data){
+var deleteItemFromCart = function(id, data){
   Models.Cart.findByIdAndRemove({ cart: data }, function(err){
     //What it really does is overwrite the whole thing.
     if (err){

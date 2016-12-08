@@ -4,6 +4,7 @@ var fs = require('fs');
 var express = require('express');
 var MongoClient = require('mongodb').MongoClient;
 var DBAccess = require('./public/javascript/backend.js');
+var Models = require('./public/javascript/model');
 //Looks at ./javascript/backend.js to look at the functions. They're basically using mongo.
 
 var app = express();
@@ -48,11 +49,27 @@ app.get('/store',function(res,req){
 });
 
 app.get('/addItem',function(res,req){
-	res.render('',{
+	console.log("In function");
+	var item = {name: 'asd', price: 5, description: "zxcvbnm", image: "qwetryu"};
+	console.log("Created test item");
+	//DBAccess.createItem(item);
+
+	var newItem = new Models.Item({item});
+	newItem.save(function (err){
+	  if (err){
+	    return console.error(err);
+	  }
+	})
+	console.log("Ran function");
+	
+	res.render('index',{
+
+	})
+	/*res.render('',{
 
 		//Renders a page that allows the user to add items.
 		//I'm thinking probably text boxes and a button that allows the user to submit things.
-	});
+	});*/
 
 });
 
