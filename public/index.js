@@ -2,7 +2,7 @@
  * This function removes a particular todo note when its dismiss button is
  * clicked.  This event listener should be delegated to the <main> element.
  */
-function removeTodoOnDelegatedDismissClick(event) {
+function removeItem(event) {
 
   var clickedElem = event.target;
   var clickedElemParent = event.target.parentNode;
@@ -22,10 +22,10 @@ function removeTodoOnDelegatedDismissClick(event) {
  * This function shows the modal to add a new todo note when the add note
  * button is clicked.
  */
-function displayAddNoteModal() {
+function addItem() {
 
   var backdropElem = document.getElementById('modal-backdrop');
-  var addNoteModalElem = document.getElementById('add-note-modal');
+  var addNoteModalElem = document.getElementById('add-item');
 
   // Show the modal and its backdrop.
   backdropElem.classList.remove('hidden');
