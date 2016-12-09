@@ -30,21 +30,20 @@
 	    <h3 class="w3-wide"><b>Generic Shop LOGO</b></h3>
 	  </div>
 	  <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-	    <a href="#">Rocks</a>
-	    <a href="#">Other</a>
-	    <a href="#">Food</a>
+	    <button id="addModal">Add Item</button>
 	  </div>
 	</nav>
 
 
 	      <section class="inventory">
 		    {{#each item}}
-		      <h2>{{name}}</h2>
+		      <!-- <h2>{{name}}</h2>
 		      <img src="{{image}}" style="width:200px; height:100px;">
 		      <div class="item-body">
 			<p class="indent-wrapped"><span class="price">Price: </span>{{body}}</p>
 			<p class="indent-wrapped"><span class="details">Details: </span>{{description}}</p>
-		       </div>
+		       </div> -->
+           {{>data}}
 		    {{/each}}
 	<footer>
       <div class="copyright">
@@ -121,5 +120,6 @@
     {{/each}}
 
   </body>
+  <script src="public/javascript/store.js"></script>
 
 </main>

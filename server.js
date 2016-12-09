@@ -35,7 +35,6 @@ var cartPageSource = fs.readFileSync(path.join(__dirname,'views','cart.handlebar
 
 app.get('/',function(req,res){
 	//Welcome Page
-	console.log("In / page");
 	Models.Item.find(function(err,items){
 	//Returns a list, so if I could get it to actually run this, we'd actually be good here.
     if (err){

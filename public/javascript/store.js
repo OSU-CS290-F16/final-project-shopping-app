@@ -43,7 +43,6 @@ function updateItem(event){
   var description = getElementById(name+"-description").value;
   var image = getElementById(name+"-image").value;
   window.location = "/updateItem?name="+active+"&price="+price+"&description="+description+"&image="+image;
-  active = "";
 }
 
 
@@ -85,6 +84,7 @@ addModalButton.addEventListener('click',openAddModal);
 var addButton = document.getElementById("add");
 addButton.addEventListener('click',addItem);
 
+console.log("Added listeners");
 //Run a function to create it. It will error if the name already exists, but that's fine.
 //Same applies with update, but autopopulate the entry-boxes with the data that already exists. That way,
 //People can just remove values from it.
