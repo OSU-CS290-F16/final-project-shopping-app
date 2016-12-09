@@ -1,6 +1,4 @@
-//document.getElementById("add-to-cart").addEventListener("click", updateCartQuantity);
-var Models = require('./public/javascript/model');
-
+//document.getElementById("add-to-cart").addEventListener("click", updateCartQuantity);\
 
 function readItems() {
   //Gets all items

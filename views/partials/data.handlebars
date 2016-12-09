@@ -1,11 +1,11 @@
 <div class="item">
-  <h2>{{name}}</h2>
-  <img src="{{image}}" style="width:200px; height:100px;">
   <div class="item-body">
+    <h2>{{name}}</h2>
+    <img src="{{image}}" style="width:200px; height:100px;">
     <p class="indent-wrapped"><span class="price">Price: </span>{{price}}</p>
     <p class="indent-wrapped"><span class="details">Details: </span>{{description}}</p>
-    <button id='{{name}}' class="update">Update</button>
-    <button id='{{name}}' class="remove">Remove</button>
-    <button id='{{name}}' class="add">Add To Cart</button>
+    <button class="update {{name}}">Update</button>
+    <button class="remove {{name}}">Remove</button>
+    <button class="add">Add To Cart</button>
   </div>
 </div>

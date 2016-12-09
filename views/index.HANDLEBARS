@@ -18,7 +18,7 @@
       <nav>
         <ul class="navbar-list">
           <li class="navbar-item "><a href="/">Home</a></li>
-          <li class="navbar-item navbar-right"><a href="cart.html"><i class="fa fa-shopping-cart">Check out </i></a></li>
+          <li class="navbar-item navbar-right"><a href="/cart"><i class="fa fa-shopping-cart">Check out </i></a></li>
         </ul>
       </nav>
 
@@ -30,11 +30,6 @@
 <nav class="w3-sidenav w3-white w3-collapse w3-top" style="z-index:3;width:150px" id="mySidenav">
   <div class="w3-container w3-padding-16">
     <h3 class="w3-wide"><b>Generic Shop LOGO</b></h3>
-  </div>
-  <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-    <a href="#">Rocks</a>
-    <a href="#">Other</a>
-    <a href="#">Food</a>
   </div>
 </nav>
 
@@ -54,6 +49,7 @@
     </footer>
 
     <div id="modal-backdrop" class="hidden"></div>
+    <!-- Add item modal -->
     <div id="add-note-modal" class="hidden">
       <div class="modal-dialog">
 
@@ -71,7 +67,31 @@
 
         <div class="modal-footer">
           <button type="button" class="modal-cancel-button">Cancel</button>
-          <button type="button" class="modal-accept-button">Add ToDo</button>
+          <button type="button" class="modal-accept-button">Add</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Update Item Modal -->
+    <div id="add-note-modal" class="hidden">
+      <div class="modal-dialog">
+
+        <div class="modal-header">
+          <h3>Add item(s) to cart</h3>
+          <button type="button" class="modal-close-button">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="input-element required">
+            <label for="number-of-items">Number of Items</label>
+            <input type="number" id="add-items-to-cart">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="modal-cancel-button">Cancel</button>
+          <button type="button" class="modal-accept-button">Add</button>
         </div>
 
       </div>

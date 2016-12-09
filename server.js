@@ -29,6 +29,10 @@ app.set('view engine', 'handlebars');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+var itemPageSource = fs.readFileSync(path.join(__dirname,'views','index.handlebars'), 'utf8');
+var cartPageSource = fs.readFileSync(path.join(__dirname,'views','cart.handlebars'), 'utf8');
+
 app.get('/',function(req,res){
 	//Welcome Page
 	console.log("In / page");
@@ -39,14 +43,8 @@ app.get('/',function(req,res){
       return console.error(err);
     }
     else{
-		var itemPageSource = fs.readFileSync(path.join(__dirname,'views','index.handlebars'), 'utf8');
 		var itemPageTemplate = Handlebars.compile(String(itemPageSource));
 
-    	console.log(items);
-    	console.log("Name",items[0].name);
-    	console.log("Price",items[0].price);
-    	console.log("Description",items[0].description);
-    	console.log("Image",items[0].image);
 
 		res.render('index',{
 			item: items
@@ -67,8 +65,10 @@ app.get('/cart',function(req,res){
       return console.error(err);
     }
     else{
+		var cartPageTemplate = Handlebars.compile(String(itemPageSource));
+
     	console.log(cart);
-		res.render('index',{
+		res.render('cart',{
 			item: cart
 		})
     }
@@ -103,6 +103,7 @@ app.get('/addItem',function(req,res){
 	  if (err){
 	    return console.error(err);
 	  }
+	  window.location = "/";
 	});
 });
 
@@ -112,6 +113,7 @@ app.get('/removeItem',function(req,res){
 	    if (err){
 	      return console.error(err);
 	    }
+	  	window.location = "/";
 	});
 });
 
@@ -122,10 +124,12 @@ app.get('/updateItem',function(req,res){
     if (err){
       return console.error(err);
     }
+	window.location = "/";
   });
   //Seems it only updates one, or it overrides the last updated.
 
 });
+
 
 app.get('/cartAdd',function(req,res){
   var newItem = new Models.Cart({cart: req.cart, cartQuantity: req.cartQuantity});
@@ -134,6 +138,7 @@ app.get('/cartAdd',function(req,res){
     if (err){
       return console.error(err);
     }
+	window.location = "/";
   });
 
 });
@@ -144,6 +149,7 @@ app.get('/cartRemove',function(req,res){
     if (err){
       return console.error(err);
     }
+  	window.location = "/cart";
   });
 });
 
@@ -154,10 +160,21 @@ app.get('/cartUpdate',function(req,res){
     if (err){
       return console.error(err);
     }
+  	window.location = "/cart";
   });
 
 });
+app.get('/cartClear',function(req,res){
+  
+  Models.Cart.remove({}, function(err){
+    //When this is called, it completely empties the cart.
+    if (err){
+      return console.error(err);
+    }
+  	window.location = "/cart";
+  });
 
+});
 
 app.listen(port,function(){
 	console.log("Listening on port: ", port);
