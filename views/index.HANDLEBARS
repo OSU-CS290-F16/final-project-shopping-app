@@ -37,19 +37,19 @@
     <a href="#">Food</a>
   </div>
 </nav>
-      <p>item</p>
-
 
       <section class="inventory">
             {{#each item}}
-              <h2>{{item.name}}</h2>
-              <img src="{{item.image}}" style="width:200px; height:100px;">
-              <div class="item-body">
-                <p class="indent-wrapped"><span class="price">Price: </span>{{item.body}}</p>
-                <p class="indent-wrapped"><span class="details">Details: </span>{{item.description}}</p>
-                <button id={{item.name}} class="update">Update</button>
-                <button id={{item.name}} class="remove">Remove</button>
-               </div>
+              <div class="item">
+                <h2>{{name}}</h2>
+                <img src="{{image}}" style="width:200px; height:100px;">
+                <div class="item-body">
+                  <p class="indent-wrapped"><span class="price">Price: </span>{{price}}</p>
+                  <p class="indent-wrapped"><span class="details">Details: </span>{{description}}</p>
+                  <button id='{{name}}' class="update">Update</button>
+                  <button id='{{name}}' class="remove">Remove</button>
+                </div>
+              </div>
             {{/each}}
 
       </section>

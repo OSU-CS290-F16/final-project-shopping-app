@@ -1,5 +1,4 @@
 //document.getElementById("add-to-cart").addEventListener("click", updateCartQuantity);
-
 var Models = require('./public/javascript/model');
 
 
@@ -63,8 +62,8 @@ function createCartItem (data){
   });
 }
 
-function updateItem(id,data){
-  Models.Item.findOneAndUpdate(id, { $set : {, price: data.price, description: data.description, image: data.image} },
+function updateItem(data){
+  Models.Item.findOneAndUpdate(data.name, { $set : { price: data.price, description: data.description, image: data.image} },
    {new:true}, function(err) {
     if (err){
       return console.error(err);
@@ -121,7 +120,6 @@ createItem(info);
 
 //To delete, just get the id (name) of the button and delete it. Also, delete every item in that div. Alternatively, refresh the page upon delete.
 
-//The same applies for update, but instead of delete, we keep the name and insert the new text inputs in to the function. 
+//The same applies for update, but instead of delete, we keep the name and insert the new text inputs in to the function.
 
 //We'll probably have a button for each designated 
-console.log(test);

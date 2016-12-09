@@ -23,6 +23,7 @@ var mongoDBName = process.env.MONGO_DB;
 var mongoURL = 'mongodb://' + mongoUser + ':' + mongoPassword + '@' + mongoHost + ':' + mongoPort + '/' + mongoDBName;
 var mongoDB;
 
+
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars');
 
@@ -38,7 +39,15 @@ app.get('/',function(req,res){
       return console.error(err);
     }
     else{
-    	console.log(items);\
+		var itemPageSource = fs.readFileSync(path.join(__dirname,'views','index.handlebars'), 'utf8');
+		var itemPageTemplate = Handlebars.compile(String(itemPageSource));
+
+    	console.log(items);
+    	console.log("Name",items[0].name);
+    	console.log("Price",items[0].price);
+    	console.log("Description",items[0].description);
+    	console.log("Image",items[0].image);
+
 		res.render('index',{
 			item: items
 		})
@@ -86,75 +95,29 @@ app.get('/cart',function(req,res){
 
 
 
-app.get('/store',function(res,req){
-	var collection = mongoDB.collection('');
-});
-
-app.get('/addItem',function(res,req){
-	var info = {'name': 'data.name', 'price': 20, 'description': 'data.description', 'image': 'data.image'};
-	console.log("In function");
-	console.log("Created test item");
-	console.log(info);
+app.get('/addItem',function(req,res){
 	//DBAccess.createItem(item);
 
-	var newItem = new Models.Item({name:info.name, price:info.price, description:info.description,image:info.image});
+	var newItem = new Models.Item({name:req.name, price:req.price, description:req.description,image:req.image});
 	newItem.save(function (err){
 	  if (err){
 	    return console.error(err);
 	  }
 	});
-
-
-  Models.Item.find(function(err,items){
-    if (err){
-      return console.error(err);
-    }
-    else{
-    	console.log("Items here");
-      console.log(items);
-    }
-    
-  });
-
-	res.render('',{
-
-		//Renders a page that allows the user to add items.
-		//I'm thinking probably text boxes and a button that allows the user to submit things.
-	});
-
 });
 
-app.get('/removeItem',function(res,req){
+app.get('/removeItem',function(req,res){
 
-	Models.Item.findOneAndRemove({ name: 'asdghj' }, function(err){
+	Models.Item.findOneAndRemove({ name: req.name }, function(err){
 	    if (err){
 	      return console.error(err);
 	    }
 	});
-
-	res.render('',{
-		//Renders a page with every item
-
-	})
-
 });
 
-app.get('/updateItem',function(res,req){
+app.get('/updateItem',function(req,res){
 
-  Models.Item.findOneAndUpdate({name:'asdfg'}, { $set : {price: '10'} },
-   function(err) {
-    if (err){
-      return console.error(err);
-    }
-  });
-  Models.Item.findOneAndUpdate({name:'asdfg'}, { $set : {description: 'data.description'} },
-   function(err) {
-    if (err){
-      return console.error(err);
-    }
-  });
-
-  Models.Item.findOneAndUpdate({name:'asdfg'}, { $set : {image: 'data.image'} },
+  Models.Item.findOneAndUpdate({name:req.name}, { $set : {price: req.price, , description: req.description, image: req.image} },
    function(err) {
     if (err){
       return console.error(err);
@@ -162,14 +125,38 @@ app.get('/updateItem',function(res,req){
   });
   //Seems it only updates one, or it overrides the last updated.
 
+});
 
-	res.render('',{
-		//Opens a page that allows the user to adjust
-		//the database entries of an item.
-	})
+app.get('/cartAdd',function(req,res){
+  var newItem = new Models.Cart({cart: req.cart, cartQuantity: req.cartQuantity});
+  //Insert data
+  newItem.save(function(err){
+    if (err){
+      return console.error(err);
+    }
+  });
 
 });
 
+app.get('/cartRemove',function(req,res){
+  Models.Cart.findOneAndRemove({ cart: req.cart }, {new:true}, function(err){
+    //id should be it's name.
+    if (err){
+      return console.error(err);
+    }
+  });
+});
+
+
+
+app.get('/cartUpdate',function(req,res){
+  Models.cart.findOneAndUpdate(req.cart, { $set : { cartQuantity: req.cartQuantity} }, {new:true}, function(err){
+    if (err){
+      return console.error(err);
+    }
+  });
+
+});
 
 
 app.listen(port,function(){
@@ -189,3 +176,125 @@ app.listen(port,function(){
     
   });
 }*/
+
+
+function readItems() {
+  //Gets all items
+  Models.Item.find(function(err,items){
+    if (err){
+      return console.error(err);
+    }
+    else{
+      return items;
+    }
+    
+  });
+}
+
+function readSpecificItems(id) {
+  //Gets a specific item
+  Models.Item.find({ name: id }, function(err,item){
+    if (err){
+      return console.error(err);
+    }
+    return item;
+  });
+}
+
+function readCart(){
+  //Gets all items in the cart
+  Models.Cart.find(function(err,cart){
+    if (err){
+      return console.error(err);
+    }
+    else{
+      return cart;
+    }
+    
+  });
+}
+//These 3 shouldn't actually be needed.
+
+
+function createItem (data){
+  //Adds a new item
+  var newItem = new Models.Item({name:data.name, price:data.price, description:data.description,image:data.image});
+  //Insert data
+  newItem.save(function (err){
+    if (err){
+      return console.error(err);
+    }
+  })
+}
+
+function createCartItem (data){
+  //Adds an item to the cart.
+  var newItem = new Models.Cart({cart: data.cart, cartQuantity: data.cartQuantity});
+  //Insert data
+  newItem.save(function(err){
+    if (err){
+      return console.error(err);
+    }
+  });
+}
+
+function updateItem(data){
+  Models.Item.findOneAndUpdate(data.name, { $set : { price: data.price, description: data.description, image: data.image} },
+   {new:true}, function(err) {
+    if (err){
+      return console.error(err);
+    }
+  });
+}
+
+function updateCartQuantity(id,data){
+  Models.cart.findOneAndUpdate(id, { $set : { cartQuantity: data.cartQuantity} }, {new:true}, function(err){
+    if (err){
+      return console.error(err);
+    }
+  });
+}
+
+function deleteItem(id){
+  Models.Item.findOneAndRemove({ name: id }, {new:true}, function(err){
+    if (err){
+      return console.error(err);
+    }
+  });
+}
+
+function deleteItemFromCart(id){
+  Models.Cart.findOneAndRemove({ cart: id }, {new:true}, function(err){
+    //id should be it's name.
+    if (err){
+      return console.error(err);
+    }
+  });
+}
+
+function clearCart(){
+  Models.Cart.remove({}, function(err){
+    //When this is called, it completely empties the cart..
+    if (err){
+      return console.error(err);
+    }
+  });
+}
+
+var info = {'name': 'name', 'price': 20, 'description': 'description', 'image': 'image'};
+//So: Grab the data from textboxes, the keys need to be string. Then create the item, and 
+//Run a function to create it. It will error if the name already exists, but that's fine.
+//Same applies with update, but autopopulate the entry-boxes with the data that already exists. That way,
+//People can just remove values from it.
+
+//So Looks like we just need to make listeners attached to buttons and basically run the appropriate function.
+//We MAY need to add event to all the functions, so they can be used as listeners. 
+
+//Okay, so for the buttons to delete, assign it an id that is the name of the product. Use that to figure out which item to delete.
+//Additionally, use it to figure out which one to update.
+
+//To delete, just get the id (name) of the button and delete it. Also, delete every item in that div. Alternatively, refresh the page upon delete.
+
+//The same applies for update, but instead of delete, we keep the name and insert the new text inputs in to the function.
+
+//We'll probably have a button for each designated 
