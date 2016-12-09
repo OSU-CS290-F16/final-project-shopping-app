@@ -1,28 +1,8 @@
-document.getElementById("add-to-cart").addEventListener("click", updateCartQuantity);
+//document.getElementById("add-to-cart").addEventListener("click", updateCartQuantity);
 
-/*
-function createItem (data){
-  //Adds a new item
-  function newItem = new Item({data});
-  //Insert data
-  newItem.save(function (err){
-    if (err){
-      return console.error(err);
-    }
-  })
-}
+var Models = require('./public/javascript/model');
 
-function createCartItem (data){
-  //Adds an item to the cart.
-  function newItem = new Cart({data});
-  //Insert data
-  newItem.save(function(err){
-    if (err){
-      return console.error(err);
-    }
-  });
-}
-*/
+
 function readItems() {
   //Gets all items
   Models.Item.find(function(err,items){
@@ -58,11 +38,34 @@ function readCart(){
     
   });
 }
+//These 3 shouldn't actually be needed.
 
+
+function createItem (data){
+  //Adds a new item
+  var newItem = new Models.Item({data});
+  //Insert data
+  newItem.save(function (err){
+    if (err){
+      return console.error(err);
+    }
+  })
+}
+
+function createCartItem (data){
+  //Adds an item to the cart.
+  var newItem = new Models.Cart({data});
+  //Insert data
+  newItem.save(function(err){
+    if (err){
+      return console.error(err);
+    }
+  });
+}
 
 function updateItem(id,data){
-  Models.Item.findByIdAndUpdate(id, { $set : {name: data.name, price: data.price, description: data.description, image: data.image} },
-   function(err) {
+  Models.Item.findOneAndUpdate(id, { $set : {, price: data.price, description: data.description, image: data.image} },
+   {new:true}, function(err) {
     if (err){
       return console.error(err);
     }
@@ -70,7 +73,7 @@ function updateItem(id,data){
 }
 
 function updateCartQuantity(id,data){
-  Models.cart.findByIdAndUpdate(id, { $set : {cart: data.cart, cartQuantity: data.cartQuantity} }, function(err){
+  Models.cart.findOneAndUpdate(id, { $set : { cartQuantity: data.cartQuantity} }, {new:true}, function(err){
     if (err){
       return console.error(err);
     }
@@ -78,19 +81,45 @@ function updateCartQuantity(id,data){
 }
 
 function deleteItem(id){
-  Models.Item.findByIdAndRemove({ name: id }, function(err){
+  Models.Item.findOneAndRemove({ name: id }, {new:true}, function(err){
     if (err){
       return console.error(err);
     }
   });
 }
 
-function deleteItemFromCart(id, data){
-  Models.Cart.findByIdAndRemove({ cart: data }, function(err){
-    //What it really does is overwrite the whole thing.
+function deleteItemFromCart(id){
+  Models.Cart.findOneAndRemove({ cart: id }, {new:true}, function(err){
+    //id should be it's name.
     if (err){
       return console.error(err);
     }
   });
 }
 
+function clearCart(){
+  Models.Cart.remove({}, function(err){
+    //When this is called, it completely empties the cart..
+    if (err){
+      return console.error(err);
+    }
+  });
+}
+
+var info = {'name': 'data.name', 'price': 'data.price', 'description': 'data.description', 'image': 'data.image'};
+//So: Grab the data from textboxes, the keys need to be string. Then create the item, and 
+createItem(info);
+//Run a function to create it. It will error if the name already exists, but that's fine.
+//Same applies with update, but autopopulate the entry-boxes with the data that already exists. That way,
+//People can just remove values from it.
+
+//So Looks like we just need to make listeners attached to buttons and basically run the appropriate function.
+//We MAY need to add event to all the functions, so they can be used as listeners. 
+
+//Okay, so for the buttons to delete, assign it an id that is the name of the product. Use that to figure out which item to delete.
+//Additionally, use it to figure out which one to update.
+
+//To delete 
+
+//We'll probably have a button for each designated 
+console.log(test);
