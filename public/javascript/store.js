@@ -1,3 +1,5 @@
+var active;
+
 function deleteItem(event){
   var classList = event.target.className.split(/\s+/);
   var name;
@@ -23,28 +25,37 @@ function addItem(event){
   window.location = "/addItem?name="+name+"&price="+price+"&description="+description+"&image="+image;
 }
 
-function openAddModal(event){
+function openUpdateModal(event){
+  var classList = event.target.className.split(/\s+/);
+  for(var i=0;i<classList.length;i++){
+    if (classList[i] !== "update"){
+      active = classList[i];
+      break;
+    }
+  }
   getElementById('modal-backdrop').classList.remove('hidden');
   getElementById('update-note-modal').classList.remove('hidden');
 }
 
 function updateItem(event){
+
+  var price = getElementById(name+"-price").value;
+  var description = getElementById(name+"-description").value;
+  var image = getElementById(name+"-image").value;
+  window.location = "/updateItem?name="+active+"&price="+price+"&description="+description+"&image="+image;
+  active = "";
+}
+
+
+function addToCart(event){
   var classList = event.target.className.split(/\s+/);
+  var name;
   for(var i=0;i<classList.length;i++){
-    if (classList[i] !== "modal-accept-button"){
+    if (classList[i] !== "addToCart"){
       name = classList[i];
       break;
     }
   }
-
-  var name = ;
-  var price = ;
-  var description = ;
-  var image = ;
-  window.location = "/updateItem?name="+name+"&price="+price+"&description="+description+"&image="+image;
-}
-function addToCart(event){
-  var name = event.id;
   window.location = "/cartAdd?name="+name+"&cartQuantity=1";
 }
 
@@ -53,9 +64,19 @@ for(var i=0;i<removeButton.length;i++){
   removeButton[i].addEventListener('click',deleteItem);
 }
 
-var updateButton = document.getElementsByClassName("update");
+var updateModalButton = document.getElementsByClassName("update");
+for(var i=0;i<updateModalButton.length;i++){
+  updateModalButton[i].addEventListener('click',openUpdateModal);
+}
+
+var updateButton = document.getElementsByClassName("modal-update-button");
 for(var i=0;i<updateButton.length;i++){
-  removeButton[i].addEventListener('click',deleteItem);
+  updateButton[i].addEventListener('click',updateItem);
+}
+
+var cartButton = document.getElementsByClassName("addToCart");
+for(var i=0;i<cartButton.length;i++){
+  cartButton[i].addEventListener('click',addToCart);
 }
 
 var addModalButton = document.getElementById("addModal");

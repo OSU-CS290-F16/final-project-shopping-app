@@ -101,19 +101,19 @@
           <div class="modal-body">
             <div class="input-element required">
               <label for="Prices">Price</label>
-              <input type="number" class="update-price-to-cart">
+              <input type="number" class="update-price-to-cart" id="{{name}}-price">
 
               <label for="Description">Description</label>
-              <input  class="update-description-to-cart">
+              <input  class="update-description-to-cart" id="{{name}}-description">
 
               <label for="Image">Image</label>
-              <input class="update-image-to-cart">
+              <input class="update-image-to-cart" id="{{name}}-image">
             </div>
           </div>
 
           <div class="modal-footer">
             <button type="button" class="modal-cancel-button">Cancel</button>
-            <button type="button" class="modal-accept-button {{name}}">Update</button>
+            <button type="button" class="modal-update-button {{name}}">Update</button>
           </div>
 
         </div>

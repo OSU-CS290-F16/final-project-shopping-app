@@ -1,12 +1,24 @@
 function deleteCart(event){
-  var cart = event.target.id;
+  var classList = event.target.className.split(/\s+/);
+  var cart;
+  for(var i=0;i<classList.length;i++){
+    if (classList[i] !== "remove"){
+      cart = classList[i];
+      break;
+    }
   window.location = "/cartRemove?cart="+cart;
   //This should automatically refresh the page.
 }
 
 function updateCart(event){
-  var cart = event.target.id;
-  var cartQuantity = getElementsByClassName(cart);
+  var classList = event.target.className.split(/\s+/);
+  var cart;
+  for(var i=0;i<classList.length;i++){
+    if (classList[i] !== "addToCart"){
+      cart = classList[i];
+      break;
+  }
+  var cartQuantity = getElementsByClassName(cart)[0].value;
   window.location = "/cartUpdate?cart="+cart+"&cartQuantity="+cartQuantity[0];
 }
 
