@@ -1,0 +1,18 @@
+{{> header}}
+
+<main>
+  <div class="item">
+    <p>
+      Price: {{item.price}}
+    </p>
+    <p>
+      Details: {{item.details}}
+    </p>
+  </div>
+
+  {{#each item.photos}}
+    {{> item-photo}}
+  {{/each}}
+</main>
+
+{{> add-photo-modal}}
