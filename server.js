@@ -117,7 +117,7 @@ app.get('/removeItem',function(req,res){
 
 app.get('/updateItem',function(req,res){
 
-  Models.Item.findOneAndUpdate({name:req.name}, { $set : {price: req.price, , description: req.description, image: req.image} },
+  Models.Item.findOneAndUpdate({name:req.name}, { $set : {price: req.price, description: req.description, image: req.image} },
    function(err) {
     if (err){
       return console.error(err);
