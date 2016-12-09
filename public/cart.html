@@ -29,12 +29,9 @@
 <!-- Sidenav/menu -->
 <nav class="w3-sidenav w3-white w3-collapse w3-top" style="z-index:3;width:150px" id="mySidenav">
   <div class="w3-container w3-padding-16">
-    <h3 class="w3-wide"><b>Generic Shop LOGO</b></h3>
+    <h3 class="w3-wide"><b><a href="index.html">Generic Shop LOGO</a></b></h3>
   </div>
   <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-    <a href="#">Rocks</a>
-    <a href="#">Other</a>
-    <a href="#">Food</a>
   </div>
 </nav>
 
@@ -46,9 +43,11 @@
               <div class="item-body">
                 <p class="indent-wrapped"><span class="price">Price: </span>{{item.body}}</p>
                 <p class="indent-wrapped"><span class="details">Details: </span>{{item.description}}</p>
-               </div>
+              </div>
+              <div class="remove-from-cart">
+                <button id="remove" class="fa fa-cart-plus"></button>
+              </div>
             {{/each}}
-
       </section>
 
     </main>

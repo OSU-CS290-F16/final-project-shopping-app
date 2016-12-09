@@ -25,13 +25,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/',function(res,req){
 	//Welcome Pagev
 	console.log("thing");
-	var data = Models.Item.find(function(err,items){
+	Models.Item.find(function(err,items){
     if (err){
       return console.error(err);
     }
     else{
 		res.render('index',{
-
+			item: items
 		})
     }
     

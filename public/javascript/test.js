@@ -61,7 +61,7 @@ function readCart(){
 
 
 function updateItem(id,data){
-  Models.Item.findByIdAndUpdate(id, { $set : {name: data.name}, $set : {price: data.price}, $set : {description: data.description}, $set : {image: data.image} },
+  Models.Item.findByIdAndUpdate(id, { $set : {name: data.name, price: data.price, description: data.description, image: data.image} },
    function(err) {
     if (err){
       return console.error(err);
@@ -70,7 +70,7 @@ function updateItem(id,data){
 }
 
 function updateCartQuantity(id,data){
-  Models.cart.findByIdAndUpdate(id, { $set : {cart: data.cart}, $set : {cartQuantity: data.cartQuantity}}, function(err){
+  Models.cart.findByIdAndUpdate(id, { $set : {cart: data.cart, cartQuantity: data.cartQuantity} }, function(err){
     if (err){
       return console.error(err);
     }
