@@ -1,11 +1,20 @@
-<div class="item">
-  <div class="item-body">
-    <h2>{{name}}</h2>
-    <img src="{{image}}" style="width:200px; height:100px;">
-    <p class="indent-wrapped"><span class="price">Price: </span>{{price}}</p>
-    <p class="indent-wrapped"><span class="details">Details: </span>{{description}}</p>
-    <button class="update {{name}}">Update</button>
-    <button class="remove {{name}}">Remove</button>
-    <button class="addToCart">Add To Cart</button>
+<section class="inventory">
+  <h2>{{name}}</h2>
+    {{#if image}}
+    <a href="./place/{{name}}">
+        <img src="./images/{{image}}" height=200px></img>
+    </a>
+    {{else}}
+    <a href="./place/{{name}}">
+        <img src="./images/no-image.jpg" height=200px></img>
+    </a>
+    {{/if}}
+
+    <div class="item-body">
+	    <p class="indent-wrapped"><span class="price">Price: </span>{{price}}</p>
+	    <p class="indent-wrapped"><span class="details">Details: </span>{{description}}</p>
+	    <button id='{{name}}' class="update">Update</button>
+	    <button id='{{name}}' class="remove">Remove</button>
+	    <button id='{{name}}' class="add">Add To Cart</button>
   </div>
-</div>
+</section>
