@@ -30,7 +30,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/',function(req,res){
 	//Welcome Page
-	var data;
 	console.log("In / page");
 	Models.Item.find(function(err,items){
 	//Returns a list, so if I could get it to actually run this, we'd actually be good here.
@@ -39,12 +38,11 @@ app.get('/',function(req,res){
       return console.error(err);
     }
     else{
-    	console.log(items);
+    	console.log(items);\
+		res.render('index',{
+			item: items
+		})
     }
-    data = items;
-	res.render('index',{
-		item: items
-	})
     
   });
 

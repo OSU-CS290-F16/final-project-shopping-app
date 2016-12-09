@@ -119,7 +119,9 @@ createItem(info);
 //Okay, so for the buttons to delete, assign it an id that is the name of the product. Use that to figure out which item to delete.
 //Additionally, use it to figure out which one to update.
 
-//To delete 
+//To delete, just get the id (name) of the button and delete it. Also, delete every item in that div. Alternatively, refresh the page upon delete.
+
+//The same applies for update, but instead of delete, we keep the name and insert the new text inputs in to the function. 
 
 //We'll probably have a button for each designated 
 console.log(test);
