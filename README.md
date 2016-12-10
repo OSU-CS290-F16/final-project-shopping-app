@@ -22,3 +22,5 @@ You can find how objects are supposed to work in public/javascript/model.js.
 
 With manually inserted items, it should be possible to read from the database via accessing the '/' page, or the '/cart' page, and delete
 by clicking the remove button.
+
+Adding and Updating works, but we have no way of sending the API the information (Though it can be done via using params.)
