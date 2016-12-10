@@ -29,4 +29,6 @@ to add an item, Localhost:<port>/cartAdd/<cart>/cartQuantity>
 To update an item, Localhost:<port>/updateItem/<name>/<price>/<description>/<image>
 To update the cart, Localhost:<port>/cartUpdate/<cart>/cartQuantity>
 Finally, you can completely empty the cart by going to Localhost:<port>/cartClear
+
+Note that it is only connected to the local mongo server, so you have to be running Mongo on your system.
 )
