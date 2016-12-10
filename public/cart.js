@@ -7,7 +7,8 @@ function deleteCart(event){
       break;
     }
   }
-  window.location = "/cartRemove?cart="+cart;
+  window.location = "/cartRemove/"+cart;
+  window.location = "/cart";
   //This should automatically refresh the page.
 }
 
@@ -22,11 +23,13 @@ function updateCart(event){
   }
 
   var cartQuantity = getElementsByClassName(cart)[0].value;
-  window.location = "/cartUpdate?cart="+cart+"&cartQuantity="+cartQuantity[0];
+  window.location = "/cartUpdate/"+cart+"/"+cartQuantity[0];
+  window.location = "/cart";
 }
 
 function clearCart(event){
   window.location = "/cartClear";
+  window.location = "/cart";
 }
 
 var removeButton = document.getElementsByClassName("remove");
