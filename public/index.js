@@ -1,132 +1,130 @@
 /*
- * This function displays the modal for adding a photo to a user page.
+ * This function removes a particular item note when its dismiss button is
+ * clicked.  This event listener should be delegated to the <main> element.
  */
-function displayAddPhotoModal() {
+function removeItemOnDelegatedDismissClick(event) {
+
+  var clickedElem = event.target;
+  var clickedElemParent = event.target.parentNode;
+
+  /*
+   * If the clicked element is the dismiss button of a item note, then remove
+   * the item from its parent.
+   */
+  if (clickedElem.classList.contains('dismiss-button') && clickedElemParent.classList.contains('item')) {
+    var elemParent = clickedElemParent.parentNode;
+    elemParent.removeChild(clickedElemParent);
+  }
+
+}
+
+/*
+ * This function shows the modal to add a new item note when the add note
+ * button is clicked.
+ */
+function displayAddItemModal() {
 
   var backdropElem = document.getElementById('modal-backdrop');
-  var addPhotoModalElem = document.getElementById('add-photo-modal');
+  var addItemModalElem = document.getElementById('add-item-modal');
 
   // Show the modal and its backdrop.
   backdropElem.classList.remove('hidden');
-  addPhotoModalElem.classList.remove('hidden');
+  addItemModalElem.classList.remove('hidden');
 
 }
 
-
 /*
- * This function closes the modal for adding a photo to a user page, clearing
- * the values in its input elements.
+ * This function hides the modal to add a new item note and clears any
+ * existing values from the input fields whenever any of the modal close
+ * actions are taken.
  */
-function closeAddPhotoModal() {
+function closeAddItemModal() {
 
   var backdropElem = document.getElementById('modal-backdrop');
-  var addPhotoModalElem = document.getElementById('add-photo-modal');
+  var addItemModalElem = document.getElementById('add-item-modal');
 
   // Hide the modal and its backdrop.
   backdropElem.classList.add('hidden');
-  addPhotoModalElem.classList.add('hidden');
+  addItemModalElem.classList.add('hidden');
 
-  clearPhotoInputValues();
+  clearItemInputValues();
 
 }
 
-
 /*
- * This function clears the values of all input elements in the photo modal.
+ * This function clears any value present in any of the item input elements.
  */
-function clearPhotoInputValues() {
+function clearItemInputValues() {
 
-  var inputElems = document.getElementsByClassName('photo-input-element');
-  for (var i = 0; i < inputElems.length; i++) {
-    var input = inputElems[i].querySelector('input, textarea');
+  var itemInputElems = document.getElementsByClassName('item-input-element');
+  for (var i = 0; i < itemInputElems.length; i++) {
+    var input = itemInputElems[i].querySelector('input, textarea');
     input.value = '';
   }
 
 }
 
-
 /*
- * Small function to get a item's identifier from the current URL.
+ * This function inserts a new item note based on the values specified in the
+ * add note modal when the modal accept button is clicked.
  */
-function getItemIDFromLocation() {
-  var pathComponents = window.location.pathname.split('/');
-  if (pathComponents[0] !== '' && pathComponents[1] !== 'people') {
-    return null;
-  }
-  return pathComponents[2];
-}
+function insertNewItem() {
 
+  // Grab the values from all the input fields.
+  var itemInputName = document.getElementById('input-name').value || '';
+  var itemInputPrice = document.getElementById('input-price').value || '';
+  var itemInputDetails = document.getElementById('input-details').value || '';
 
-/*
- * This function uses Handlebars on the client side to generate HTML for a
- * item photo and adds that item photo HTML into the DOM.
- */
-function insertNewPhoto() {
+  // We only add the note if we have a value for "what".
+  if (itemInputWhat.trim()) {
 
-  var photoURL = document.getElementById('photo-url-input').value || '';
-  var photoCaption = document.getElementById('photo-caption-input').value || '';
+    // Create a new item section and append it to the main element.
+    var newItemHTML = generateItemHTML(
+      itemInputName.trim(),
+      itemInputPrice.trim(),
+      itemInputDetails.trim()
+    );
+    var mainElement = document.querySelector('main');
+    mainElement.insertAdjacentHTML('beforeend', newItemHTML);
 
-  if (photoURL.trim()) {
-
-    var itemID = getItemIDFromLocation();
-    if (itemID) {
-      storeItemPhoto(itemID, photoURL, photoCaption, function (err) {
-        if (err) {
-
-          // If we couldn't save the item photo, alert the user.
-          alert("Unable to save item's photo.  Got this error:\n\n" + err);
-
-        } else {
-
-          /*
-           * If we successfully saved the item photo, generate HTML for the
-           * new photo element and add it into the DOM.
-           */
-          var itemPhotoTemplate = Handlebars.templates['item-photo'];
-          var itemPhotoHTML = itemPhotoTemplate({
-            url: photoURL,
-            caption: photoCaption
-          });
-          var mainElement = document.querySelector('main');
-          mainElement.insertAdjacentHTML('beforeend', itemPhotoHTML);
-
-        }
-      });
-    }
-
-    closeAddPhotoModal();
+    closeAddItemModal();
 
   } else {
 
-    alert('You must specify a value for the "URL" field.');
+    // If there's no "what" value specified, throw an alert.
+    alert('You must specify a value for the "what" field.');
 
   }
 
 }
-
 
 // Wait until the DOM content is loaded to hook up UI interactions, etc.
 window.addEventListener('DOMContentLoaded', function (event) {
 
-  var addPhotoButton = document.getElementById('add-photo-button');
-  if (addPhotoButton) {
-    addPhotoButton.addEventListener('click', displayAddPhotoModal);
+  // Delegate an event listener to <main> to handle clicks on dismiss buttons.
+  var main = document.querySelector('main');
+  if (main) {
+    main.addEventListener('click', removeItemOnDelegatedDismissClick);
   }
 
-  var modalCloseButton = document.querySelector('#add-photo-modal .modal-close-button');
+  var addItemButton = document.getElementById('add-item-button');
+  if (addItemButton) {
+    addItemButton.addEventListener('click', displayAddNoteModal);
+  }
+
+  var modalCloseButton = document.querySelector('#add-item-modal .modal-close-button');
   if (modalCloseButton) {
-    modalCloseButton.addEventListener('click', closeAddPhotoModal);
+    modalCloseButton.addEventListener('click', closeAddItemModal);
   }
 
-  var modalCancalButton = document.querySelector('#add-photo-modal .modal-cancel-button');
-  if (modalCancalButton) {
-    modalCancalButton.addEventListener('click', closeAddPhotoModal);
+  var modalCancelButton = document.querySelector('#add-item-modal .modal-cancel-button');
+  if (modalCancelButton) {
+    modalCancelButton.addEventListener('click', closeAddItemModal);
   }
 
-  var modalAcceptButton = document.querySelector('#add-photo-modal .modal-accept-button');
+  var modalAcceptButton = document.querySelector('#add-item-modal .modal-accept-button');
   if (modalAcceptButton) {
-    modalAcceptButton.addEventListener('click', insertNewPhoto);
+    modalAcceptButton.addEventListener('click', insertNewItem);
   }
 
 });
-

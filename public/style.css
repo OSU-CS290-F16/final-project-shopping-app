@@ -8,7 +8,7 @@ a {
 }
 
 header {
-  background-color: black;
+  background-color: yellow;
   padding: 5px 20px 0 5px;
 }
 
@@ -52,8 +52,37 @@ nav {
   color: white;
 }
 
-.navbar-item a:hover {
+.navbar-item:hover a {
   background-color: #444;
+}
+
+.navbar-menu {
+  position: relative;
+}
+
+.navbar-menu-list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: none;
+  padding: 0;
+  list-style-type: none;
+  z-index: 10;
+  box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+.navbar-menu-list,
+.navbar-menu-list li {
+  background-color: #444;
+}
+
+.navbar-menu:hover .navbar-menu-list {
+  display: initial;
+}
+
+.navbar-menu-list li:hover,
+.navbar-menu-list li:hover a {
+  background-color: #565656;
 }
 
 .navbar-right {
@@ -67,21 +96,19 @@ main {
   min-height: 300px;
 }
 
-.inventory {
-  background-color: white;
+.item {
+  background-color: #fffe6e;
   position: relative;
   width: 300px;
   min-height: 300px;
   margin: 20px;
   font-family: "Comic Sans MS", cursive, sans-serif;
-  font-size: 14px;
+  font-size: 24px;
   font-weight: 200;
   word-wrap: break-word;
-  margin-left:150px;
 }
 
-.inventory h2 {
-  margin-left:150px;
+.item h2 {
   margin: 20px;
   text-align: center;
 }
@@ -94,40 +121,43 @@ main {
   list-style-type: circle;
 }
 
-.inventory p {
+.item p {
   margin: 15px 0;
 }
 
-.inventory p.indent-wrapped {
+.item p.indent-wrapped {
   padding-left: 50px;
   text-indent: -50px;
 }
 
-.item .name,
-.item .price,
-.item .detail {
+.item .when,
+.item .where,
+.item .who {
   font-weight: bold;
 }
 
-.inventory .add-to-cart {
+.item .dismiss-button {
   font-family: sans-serif;
   position: absolute;
   top: 0;
   right: 10px;
-  font-size: 20px;
+  font-size: 30px;
   display: none;
   cursor: pointer;
 }
 
+.item:hover .dismiss-button {
+  display: initial;
+}
 
-.add-to-cart {
+.add-note-button-container {
   position: fixed;
   bottom: 35px;
   right: 35px;
   z-index: 10;
 }
 
-#add-button {
+#add-note-button {
   width: 64px;
   height: 64px;
   background-color: red;
@@ -142,7 +172,7 @@ main {
   outline: none;
 }
 
-#add-button:hover {
+#add-note-button:hover {
   box-shadow: 2px 6px 12px rgba(0, 0, 0, 0.33);
 }
 
@@ -169,7 +199,7 @@ footer .copyright {
   background-color: rgba(0, 0, 0, 0.85);
 }
 
-#add-to-cart-modal {
+#add-note-modal {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -218,32 +248,32 @@ footer .copyright {
   padding: 20px;
 }
 
-.input-element {
+.item-input-element {
   display: flex;
   align-items: center;
   font-size: 20px;
   margin: 10px 0;
 }
 
-.input-element label {
+.item-input-element label {
   font-weight: 600;
   flex: 1 75px;
   margin-right: 10px;
 }
 
-.input-element input,
-.input-element textarea {
+.item-input-element input,
+.item-input-element textarea {
   flex: 6 200px;
   padding: 8px;
   font-size: 20px;
   border: 1px solid #aaa;
 }
 
-.input-element textarea {
+.item-input-element textarea {
   min-height: 64px;
 }
 
-.input-element.required label::after {
+.item-input-element.required label::after {
   content: ' *';
   color: red;
 }
@@ -278,22 +308,28 @@ footer .copyright {
   background-color: #5481e4;
 }
 
-.error-container {
+.info-container {
   flex: 1 100%;
   text-align: center;
 }
 
-.error-container h2,
-.error-container h3 {
+.info-container h2,
+.info-container h3 {
   margin: 0;
   font-weight: lighter;
 }
 
-.error-container h2 {
-  font-size: 96px;
+.info-container h2 {
+  font-size: 80px;
 }
 
-.error-container h3 {
+.info-container h3 {
   font-size: 32px;
+}
+
+.homepage-icon {
+  font-size: 175px;
+  line-height: 175px;
+  color: #333;
 }
 
