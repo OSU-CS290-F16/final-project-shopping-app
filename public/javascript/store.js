@@ -10,6 +10,7 @@ function deleteItem(event){
     }
   }
   window.location = "/removeItem/"+name;
+  window.location = "/";
 }
 
 function openAddModal(event){
@@ -25,6 +26,7 @@ function addItem(event){
   document.getElementById('modal-backdrop').classList.add('hidden');
   document.getElementById('add-note-modal').classList.add('hidden');
   window.location = "/addItem/"+name+"/"+price+"/"+description+"/"+image;
+  window.location = "/";
 }
 
 function openUpdateModal(event){
@@ -47,6 +49,7 @@ function updateItem(event){
   document.getElementById('modal-backdrop').classList.add('hidden');
   document.getElementById('update-note-modal').classList.add('hidden');
   window.location = "/updateItem/"+price+"/"+description+"/"+image;
+  window.location = "/";
 }
 
 
