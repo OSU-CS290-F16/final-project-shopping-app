@@ -35,7 +35,6 @@ var cartPageSource = fs.readFileSync(path.join(__dirname,'views','cart.handlebar
 
 app.get('/',function(req,res){
 	//Welcome Page
-	console.log("In / page");
 	Models.Item.find(function(err,items){
 	//Returns a list, so if I could get it to actually run this, we'd actually be good here.
     if (err){
@@ -98,7 +97,7 @@ app.get('/cart',function(req,res){
 app.get('/addItem',function(req,res){
 	//DBAccess.createItem(item);
 
-	var newItem = new Models.Item({name:req.name, price:req.price, description:req.description,image:req.image});
+	var newItem = new Models.Item({'name':req.name, 'price':req.price, 'description':req.description,'image':req.image});
 	newItem.save(function (err){
 	  if (err){
 	    return console.error(err);
@@ -109,7 +108,7 @@ app.get('/addItem',function(req,res){
 
 app.get('/removeItem',function(req,res){
 
-	Models.Item.findOneAndRemove({ name: req.name }, function(err){
+	Models.Item.findOneAndRemove({ 'name': req.name }, function(err){
 	    if (err){
 	      return console.error(err);
 	    }
@@ -119,7 +118,7 @@ app.get('/removeItem',function(req,res){
 
 app.get('/updateItem',function(req,res){
 
-  Models.Item.findOneAndUpdate({name:req.name}, { $set : {price: req.price, description: req.description, image: req.image} },
+  Models.Item.findOneAndUpdate({name:req.name}, { $set : {'price': req.price, 'description': req.description, 'image': req.image} },
    function(err) {
     if (err){
       return console.error(err);
@@ -132,7 +131,7 @@ app.get('/updateItem',function(req,res){
 
 
 app.get('/cartAdd',function(req,res){
-  var newItem = new Models.Cart({cart: req.cart, cartQuantity: req.cartQuantity});
+  var newItem = new Models.Cart({'cart': req.cart, 'cartQuantity': req.cartQuantity});
   //Insert data
   newItem.save(function(err){
     if (err){
@@ -144,7 +143,7 @@ app.get('/cartAdd',function(req,res){
 });
 
 app.get('/cartRemove',function(req,res){
-  Models.Cart.findOneAndRemove({ cart: req.cart }, {new:true}, function(err){
+  Models.Cart.findOneAndRemove({ 'cart': req.cart }, {new:true}, function(err){
     //id should be it's name.
     if (err){
       return console.error(err);
@@ -156,7 +155,7 @@ app.get('/cartRemove',function(req,res){
 
 
 app.get('/cartUpdate',function(req,res){
-  Models.cart.findOneAndUpdate(req.cart, { $set : { cartQuantity: req.cartQuantity} }, {new:true}, function(err){
+  Models.cart.findOneAndUpdate(req.cart, { $set : { 'cartQuantity': req.cartQuantity} }, {new:true}, function(err){
     if (err){
       return console.error(err);
     }
