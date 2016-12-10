@@ -13,8 +13,8 @@ function deleteItem(event){
 }
 
 function openAddModal(event){
-  getElementById('modal-backdrop').classList.remove('hidden');
-  getElementById('add-note-modal').classList.remove('hidden');
+  document.getElementById('modal-backdrop').classList.remove('hidden');
+  document.getElementById('add-note-modal').classList.remove('hidden');
 }
 
 function addItem(event){
@@ -33,8 +33,8 @@ function openUpdateModal(event){
       break;
     }
   }
-  getElementById('modal-backdrop').classList.remove('hidden');
-  getElementById('update-note-modal').classList.remove('hidden');
+  document.getElementById('modal-backdrop').classList.remove('hidden');
+  document.getElementById('update-note-modal').classList.remove('hidden');
 }
 
 function updateItem(event){
@@ -47,7 +47,9 @@ function updateItem(event){
 
 
 function addToCart(event){
+  console.log("Event target: ", event.target);
   var classList = event.target.className.split(/\s+/);
+  console.log("CLASSLIST IS HERE!!!!!!",classList)
   var name;
   for(var i=0;i<classList.length;i++){
     if (classList[i] !== "addToCart"){
@@ -55,7 +57,7 @@ function addToCart(event){
       break;
     }
   }
-  window.location = "/cartAdd?name="+name+"&cartQuantity=1";
+  window.location = "/cartAdd/"+name+"/1";
 }
 
 var removeButton = document.getElementsByClassName("remove");

@@ -6,7 +6,8 @@ function deleteCart(event){
       cart = classList[i];
       break;
     }
-  window.location = "/cartRemove?cart="+cart;
+  }
+  window.location = "/cartRemove/"+cart;
   //This should automatically refresh the page.
 }
 
@@ -17,9 +18,11 @@ function updateCart(event){
     if (classList[i] !== "addToCart"){
       cart = classList[i];
       break;
+  	}
   }
+
   var cartQuantity = getElementsByClassName(cart)[0].value;
-  window.location = "/cartUpdate?cart="+cart+"&cartQuantity="+cartQuantity[0];
+  window.location = "/cartUpdate/"+cart+"/"+cartQuantity[0];
 }
 
 function clearCart(event){

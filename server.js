@@ -1,6 +1,7 @@
 var path = require('path');
 var http = require('http');
 var fs = require('fs');
+var url = require('url');
 var express = require('express');
 var exphbs = require('express-handlebars');
 var Handlebars = require('handlebars');
@@ -94,10 +95,10 @@ app.get('/cart',function(req,res){
 
 
 
-app.get('/addItem',function(req,res){
+app.get('/addItem/:name/:price/:description/:image',function(req,res){
 	//DBAccess.createItem(item);
 
-	var newItem = new Models.Item({'name':req.name, 'price':req.price, 'description':req.description,'image':req.image});
+	var newItem = new Models.Item({'name':req.params.name, 'price':req.params.price, 'description':req.params.params.description,'image':req.params.image});
 	newItem.save(function (err){
 	  if (err){
 	    return console.error(err);
@@ -106,9 +107,9 @@ app.get('/addItem',function(req,res){
 	});
 });
 
-app.get('/removeItem',function(req,res){
+app.get('/removeItem/:name',function(req,res){
 
-	Models.Item.findOneAndRemove({ 'name': req.name }, function(err){
+	Models.Item.findOneAndRemove({ 'name': req.params.name }, function(err){
 	    if (err){
 	      return console.error(err);
 	    }
@@ -116,9 +117,9 @@ app.get('/removeItem',function(req,res){
 	});
 });
 
-app.get('/updateItem',function(req,res){
+app.get('/updateItem/:name/:price/:description/:image',function(req,res){
 
-  Models.Item.findOneAndUpdate({name:req.name}, { $set : {'price': req.price, 'description': req.description, 'image': req.image} },
+  Models.Item.findOneAndUpdate({name:req.params.name}, { $set : {'price': req.params.price, 'description': req.params.description, 'image': req.params.image} },
    function(err) {
     if (err){
       return console.error(err);
@@ -130,8 +131,8 @@ app.get('/updateItem',function(req,res){
 });
 
 
-app.get('/cartAdd',function(req,res){
-  var newItem = new Models.Cart({'cart': req.cart, 'cartQuantity': req.cartQuantity});
+app.get('/cartAdd/:cart/:cartQuantity',function(req,res){
+  var newItem = new Models.Cart({'cart': req.params.cart, 'cartQuantity': req.params.cartQuantity});
   //Insert data
   newItem.save(function(err){
     if (err){
@@ -142,20 +143,19 @@ app.get('/cartAdd',function(req,res){
 
 });
 
-app.get('/cartRemove',function(req,res){
-  Models.Cart.findOneAndRemove({ 'cart': req.cart }, {new:true}, function(err){
+app.get('/cartRemove/:cart',function(req,res){
+  Models.Cart.findOneAndRemove({ 'cart': req.params.cart }, {new:true}, function(err){
     //id should be it's name.
     if (err){
       return console.error(err);
     }
-  	window.location = "/cart";
   });
 });
 
 
 
-app.get('/cartUpdate',function(req,res){
-  Models.cart.findOneAndUpdate(req.cart, { $set : { 'cartQuantity': req.cartQuantity} }, {new:true}, function(err){
+app.get('/cartUpdate/:cart/:cartQuantity',function(req,res){
+  Models.cart.findOneAndUpdate(req.params.cart, { $set : { 'cartQuantity': req.params.cartQuantity} }, {new:true}, function(err){
     if (err){
       return console.error(err);
     }

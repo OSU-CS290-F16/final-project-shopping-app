@@ -9,7 +9,7 @@ function deleteItem(event){
       break;
     }
   }
-  window.location = "/removeItem?name="+name;
+  window.location = "/removeItem/"+name;
 }
 
 function openAddModal(event){
@@ -22,7 +22,9 @@ function addItem(event){
   var price = document.getElementById("addprice").value;
   var description = document.getElementById("adddescription").value;
   var image = document.getElementById("addimage").value;
-  window.location = "/addItem?name="+name+"&price="+price+"&description="+description+"&image="+image;
+  document.getElementById('modal-backdrop').classList.add('hidden');
+  document.getElementById('add-note-modal').classList.add('hidden');
+  window.location = "/addItem/"+name+"/"+price+"/"+description+"/"+image;
 }
 
 function openUpdateModal(event){
@@ -34,7 +36,7 @@ function openUpdateModal(event){
     }
   }
   document.getElementById('modal-backdrop').classList.remove('hidden');
-  document.getElementById('update-note-modal').classList.remove('hidden');
+  document.getElementByClass('update-note-modal').classList.remove('hidden');
 }
 
 function updateItem(event){
@@ -42,12 +44,16 @@ function updateItem(event){
   var price = getElementById(name+"-price").value;
   var description = getElementById(name+"-description").value;
   var image = getElementById(name+"-image").value;
-  window.location = "/updateItem?name="+active+"&price="+price+"&description="+description+"&image="+image;
+  document.getElementById('modal-backdrop').classList.add('hidden');
+  document.getElementById('update-note-modal').classList.add('hidden');
+  window.location = "/updateItem/"+price+"/"+description+"/"+image;
 }
 
 
 function addToCart(event){
+  console.log("Event target: ", event.target);
   var classList = event.target.className.split(/\s+/);
+  console.log("CLASSLIST IS HERE!!!!!!",classList)
   var name;
   for(var i=0;i<classList.length;i++){
     if (classList[i] !== "addToCart"){
@@ -55,7 +61,8 @@ function addToCart(event){
       break;
     }
   }
-  window.location = "/cartAdd?name="+name+"&cartQuantity=1";
+  window.location = "/cartAdd/"+name+"/1";
+  window.location = "/cart";
 }
 
 var removeButton = document.getElementsByClassName("remove");
