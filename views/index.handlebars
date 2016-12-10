@@ -1,125 +1,23 @@
 {{> header}}
 
 <main>
-	  <head>
-
-	    <title>Shopping App</title>
-
-	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" media="screen">
-	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-	    <link rel="stylesheet" href="style.css" media="screen">
-
-	  </head>
-	  <body>
-
-
-	    <header>
-	      <nav>
-		<ul class="navbar-list">
-		  <li class="navbar-item "><a href="/">Home</a></li>
-		  <li class="navbar-item navbar-right"><a href="/cart"><i class="fa fa-shopping-cart">Check out </i></a></li>
-		</ul>
-	      </nav>
-
-	    </header>
-
-	    <main>
 
 	<nav class="w3-sidenav w3-white w3-collapse w3-top" style="z-index:3;width:150px" id="mySidenav">
 	  <div class="w3-container w3-padding-16">
 	    <h3 class="w3-wide"><b>Generic Shop LOGO</b></h3>
 	  </div>
 	  <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-	    <button id="addModal">Add Item</button>
+	    <a href="#">Rocks</a>
+	    <a href="#">Other</a>
+	    <a href="#">Food</a>
 	  </div>
 	</nav>
 
+	  {{#each inventory}}
+		{{> data}}
+	  {{/each}}
 
-	      <section class="inventory">
-		    {{#each item}}
-		      <!-- <h2>{{name}}</h2>
-		      <img src="{{image}}" style="width:200px; height:100px;">
-		      <div class="item-body">
-			<p class="indent-wrapped"><span class="price">Price: </span>{{body}}</p>
-			<p class="indent-wrapped"><span class="details">Details: </span>{{description}}</p>
-		       </div> -->
-           {{>data}}
-		    {{/each}}
-	<footer>
-      <div class="copyright">
-        Copyright &copy; 2016
-      </div>
-    </footer>
-
-
-
-    <div id="modal-backdrop" class="hidden"></div>
-    <!-- Add item modal -->
-    <div id="add-note-modal" class="hidden">
-      <div class="modal-dialog">
-
-        <div class="modal-header">
-          <h3>Add item</h3>
-          <button type="button" class="modal-close-button">&times;</button>
-        </div>
-
-        <div class="modal-body">
-          <div class="input-element required">
-            <label for="number-of-items">Name</label>
-            <input id="addname">
-
-            <label for="number-of-items">Price</label>
-            <input type="number" id="addprice">
-
-            <label for="number-of-items">Description</label>
-            <input  id="adddescription">
-
-            <label for="number-of-items">Image</label>
-            <input id="addimage">
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="modal-cancel-button">Cancel</button>
-          <button type="button" class="modal-accept-button" id="add">Add</button>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Update Item Modal -->
-    {{#each item}}
-      <div class="hidden update-note-modal">
-        <div class="modal-dialog">
-
-          <div class="modal-header">
-            <h3>Update Item</h3>
-            <button type="button" class="modal-close-button">&times;</button>
-          </div>
-
-          <div class="modal-body">
-            <div class="input-element required">
-              <label for="Prices">Price</label>
-              <input type="number" class="update-price-to-cart" id="{{name}}-price">
-
-              <label for="Description">Description</label>
-              <input  class="update-description-to-cart" id="{{name}}-description">
-
-              <label for="Image">Image</label>
-              <input class="update-image-to-cart" id="{{name}}-image">
-            </div>
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="modal-cancel-button">Cancel</button>
-            <button type="button" class="modal-update-button {{name}}">Update</button>
-          </div>
-
-        </div>
-      </div>
-    {{/each}}
-
-  </body>
-  <script src="store.js"></script>
 
 </main>
+
+{{> footer}}

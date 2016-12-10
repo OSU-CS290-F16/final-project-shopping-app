@@ -1,11 +1,17 @@
 <div class="item">
   <div class="item-body">
     <h2>{{name}}</h2>
-    <img src="{{image}}" style="width:200px; height:100px;">
+    {{#if image}}
+    <a href="./place/{{name}}">
+        <img src="./images/{{image}}" height=200px></img>
+    </a>
+    {{else}}
+    <a href="./place/{{name}}">
+        <img src="./images/no-image.jpg" height=200px></img>
+    </a>
+    {{/if}}
     <p class="indent-wrapped"><span class="price">Price: </span>{{price}}</p>
     <p class="indent-wrapped"><span class="details">Details: </span>{{description}}</p>
     <button class="update {{name}}">Update</button>
     <button class="remove {{name}}">Remove</button>
     <button class="addToCart {{name}}">Add To Cart</button>
-  </div>
-</div>
