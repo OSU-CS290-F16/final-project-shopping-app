@@ -23,4 +23,10 @@ You can find how objects are supposed to work in public/javascript/model.js.
 With manually inserted items, it should be possible to read from the database via accessing the '/' page, or the '/cart' page, and delete
 by clicking the remove button.
 
-Adding and Updating works, but we have no way of sending the API the information (Though it can be done via using params.)
+Adding and Updating works, but we have no way of sending the API the information (Though it can be done via using params.
+Basically, go to Localhost:<port>/addItem/<name>/<price>/<description>/<image>
+to add an item, Localhost:<port>/cartAdd/<cart>/cartQuantity>
+To update an item, Localhost:<port>/updateItem/<name>/<price>/<description>/<image>
+To update the cart, Localhost:<port>/cartUpdate/<cart>/cartQuantity>
+Finally, you can completely empty the cart by going to Localhost:<port>/cartClear
+)
