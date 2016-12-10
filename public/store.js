@@ -13,8 +13,8 @@ function deleteItem(event){
 }
 
 function openAddModal(event){
-  document.getElementById('modal-backdrop').classList.remove('hidden');
-  document.getElementById('add-note-modal').classList.remove('hidden');
+  getElementById('modal-backdrop').classList.remove('hidden');
+  getElementById('add-note-modal').classList.remove('hidden');
 }
 
 function addItem(event){
@@ -33,8 +33,8 @@ function openUpdateModal(event){
       break;
     }
   }
-  document.getElementById('modal-backdrop').classList.remove('hidden');
-  document.getElementById('update-note-modal').classList.remove('hidden');
+  getElementById('modal-backdrop').classList.remove('hidden');
+  getElementById('update-note-modal').classList.remove('hidden');
 }
 
 function updateItem(event){
