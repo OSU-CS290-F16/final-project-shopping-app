@@ -35,7 +35,7 @@ for(var i=0;i<removeButton.length;i++){
 }
 var updateButton = document.getElementsByClassName("update");
 for(var i=0;i<removeButton.length;i++){
-  removeButton[i].addEventListener('click',updateCart);
+  updateButton[i].addEventListener('click',updateCart);
 }
 
 
