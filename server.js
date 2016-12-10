@@ -103,7 +103,6 @@ app.get('/addItem/:name/:price/:description/:image',function(req,res){
 	  if (err){
 	    return console.error(err);
 	  }
-	  window.location = "/";
 	});
 });
 
@@ -113,7 +112,6 @@ app.get('/removeItem/:name',function(req,res){
 	    if (err){
 	      return console.error(err);
 	    }
-	  	window.location = "/";
 	});
 });
 
@@ -124,7 +122,6 @@ app.get('/updateItem/:name/:price/:description/:image',function(req,res){
     if (err){
       return console.error(err);
     }
-	window.location = "/";
   });
   //Seems it only updates one, or it overrides the last updated.
 
@@ -138,7 +135,6 @@ app.get('/cartAdd/:cart/:cartQuantity',function(req,res){
     if (err){
       return console.error(err);
     }
-	window.location = "/";
   });
 
 });
@@ -159,7 +155,6 @@ app.get('/cartUpdate/:cart/:cartQuantity',function(req,res){
     if (err){
       return console.error(err);
     }
-  	window.location = "/cart";
   });
 
 });
@@ -170,7 +165,6 @@ app.get('/cartClear',function(req,res){
     if (err){
       return console.error(err);
     }
-  	window.location = "/cart";
   });
 
 });
